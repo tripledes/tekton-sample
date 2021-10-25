@@ -10,10 +10,10 @@ import (
 )
 
 type WebApp struct {
-	db *database.DbConn
+	db database.DB
 }
 
-func NewWebApp(db *database.DbConn) *WebApp {
+func NewWebApp(db database.DB) *WebApp {
 	return &WebApp{db: db}
 }
 
