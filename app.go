@@ -18,11 +18,12 @@ func main() {
 		dbUrl = "mongodb://localhost:27017"
 	}
 
-	db, err := database.New(dbUrl)
-	app := api.NewWebApp(db)
+	db, err := database.NewDB(dbUrl)
 	if err != nil {
 		log.Fatalf("error connecting to the database: %v", err)
 	}
+
+	log.Print("connected to the DB")
 
 	defer func() {
 		if err := db.Close(); err != nil {
@@ -30,9 +31,10 @@ func main() {
 		}
 	}()
 
+	app := api.NewWebApp(db)
 	router := gin.Default()
 	router.GET("/quotes/all", app.GetAllQuotes)
-
+	router.GET("/quotes/one", app.GetOneQuote)
 	router.Run(":8080")
 
 }
