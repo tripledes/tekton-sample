@@ -7,8 +7,6 @@ import (
 	"github.com/tripledes/web-quotes/pkg/database"
 
 	"github.com/tripledes/web-quotes/pkg/api"
-
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -32,9 +30,5 @@ func main() {
 	}()
 
 	app := api.NewWebApp(db)
-	router := gin.Default()
-	router.GET("/quotes/all", app.GetAllQuotes)
-	router.GET("/quotes/one", app.GetOneQuote)
-	router.Run(":8080")
-
+	app.SetupServer().Run(":8080")
 }

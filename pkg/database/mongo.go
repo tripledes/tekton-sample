@@ -17,14 +17,6 @@ type MongoClient struct {
 	ctx    context.Context
 }
 
-/*func NewDB(dbUrl string) (*DbConn, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(dbUrl))
-	col := client.Database("quotesdb").Collection("quotes")
-	return &DbConn{Client: client, Col: col}, err
-    }*/
-
 func (m *MongoClient) Close() error {
 	return m.Client.Disconnect(m.ctx)
 }
